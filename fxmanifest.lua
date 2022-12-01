@@ -7,7 +7,6 @@ description 'rsg-travel'
 
 client_scripts {
     'client/client.lua',
-	'client/npc.lua',
 	'config.lua',
 }
 
