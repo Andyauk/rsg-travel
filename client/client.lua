@@ -1,13 +1,13 @@
-local QRCore = exports['qr-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 
 -- travel from stdenis to guarma
 Citizen.CreateThread(function()
-	exports['qr-core']:createPrompt('stdenis-buy-ticket', vector3(2663.5056, -1543.155, 45.969764), QRCore.Shared.Keybinds['ENTER'], 'Buy a Ticket', {
+	exports['rsg-core']:createPrompt('stdenis-buy-ticket', vector3(2663.5056, -1543.155, 45.969764), RSGCore.Shared.Keybinds['ENTER'], 'Buy a Ticket', {
 		type = 'server',
 		event = 'rsg-travel:server:buyticket',
 		args = { Config.TicketCost },
 	})
-	exports['qr-core']:createPrompt('stdenis-guarma', vector3(2663.5056, -1543.155, 45.969764), QRCore.Shared.Keybinds['J'], 'Travel to Guarma', { -- [J]
+	exports['rsg-core']:createPrompt('stdenis-guarma', vector3(2663.5056, -1543.155, 45.969764), RSGCore.Shared.Keybinds['J'], 'Travel to Guarma', { -- [J]
 		type = 'client',
 		event = 'rsg-travel:client:guarma_boat',
 		args = {},
@@ -19,12 +19,12 @@ end)
 
 -- from guarma to stdenis
 Citizen.CreateThread(function()
-	exports['qr-core']:createPrompt('guarma-buy-ticket', vector3(1268.6583, -6851.772, 43.318504), QRCore.Shared.Keybinds['ENTER'], 'Buy a Ticket', {
+	exports['rsg-core']:createPrompt('guarma-buy-ticket', vector3(1268.6583, -6851.772, 43.318504), RSGCore.Shared.Keybinds['ENTER'], 'Buy a Ticket', {
 		type = 'server',
 		event = 'rsg-travel:server:buyticket',
 		args = { Config.TicketCost },
 	})
-	exports['qr-core']:createPrompt('guarma-stdenis', vector3(1268.6583, -6851.772, 43.318504), QRCore.Shared.Keybinds['J'], 'Travel to St Denis', {
+	exports['rsg-core']:createPrompt('guarma-stdenis', vector3(1268.6583, -6851.772, 43.318504), RSGCore.Shared.Keybinds['J'], 'Travel to St Denis', {
 		type = 'client',
 		event = 'rsg-travel:client:stdenis_boat',
 		args = {},
@@ -37,7 +37,7 @@ end)
 -- boat travel to guarma
 RegisterNetEvent("rsg-travel:client:guarma_boat")
 AddEventHandler("rsg-travel:client:guarma_boat", function()
-	local hasItem = QRCore.Functions.HasItem('boatticket', 1)
+	local hasItem = RSGCore.Functions.HasItem('boatticket', 1)
 	if hasItem then
 		TriggerServerEvent('rsg-travel:server:removeItem', 'boatticket', 1)
 		-- tp bateau
@@ -59,14 +59,14 @@ AddEventHandler("rsg-travel:client:guarma_boat", function()
 		SetCinematicModeActive(false)
 		ShutdownLoadingScreen()
 	else
-		QRCore.Functions.Notify('you do not have a ticket!', 'error')
+		RSGCore.Functions.Notify('you do not have a ticket!', 'error')
 	end
 end)
 
 -- boat travel to stdenis
 RegisterNetEvent("rsg-travel:client:stdenis_boat")
 AddEventHandler("rsg-travel:client:stdenis_boat", function()
-	local hasItem = QRCore.Functions.HasItem('boatticket', 1)
+	local hasItem = RSGCore.Functions.HasItem('boatticket', 1)
 	if hasItem then
 		-- tp bateau
 		Citizen.InvokeNative(0x1E5B70E53DB661E5, 0, 0, 0, 'Heading to Saint Denis Port', 'Your boat is sailing', 'Have a great trip ...')
@@ -82,7 +82,7 @@ AddEventHandler("rsg-travel:client:stdenis_boat", function()
 		Wait(1000)
 		SetCinematicModeActive(false)
 	else
-		QRCore.Functions.Notify('you do not have a ticket!', 'error')
+		RSGCore.Functions.Notify('you do not have a ticket!', 'error')
 	end
 end)
 
