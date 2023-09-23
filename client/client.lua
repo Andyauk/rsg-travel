@@ -3,13 +3,13 @@ local RSGCore = exports['rsg-core']:GetCoreObject()
 -- travel from stdenis to guarma
 Citizen.CreateThread(function()
     -- buy ticket
-    exports['rsg-core']:createPrompt('stdenis-buy-ticket', vector3(2663.5056, -1543.155, 45.969764), RSGCore.Shared.Keybinds['ENTER'], 'Buy a Ticket', {
+    exports['rsg-core']:createPrompt('stdenis-buy-ticket', vector3(2663.5056, -1543.155, 45.969764), RSGCore.Shared.Keybinds['ENTER'], Lang:t('label1'), {
         type = 'client',
         event = 'rsg-travel:client:buyticket',
         args = {},
     })
     -- travel to guarma
-    exports['rsg-core']:createPrompt('stdenis-guarma', vector3(2663.5056, -1543.155, 45.969764), RSGCore.Shared.Keybinds['J'], 'Travel to Guarma', { -- [J]
+    exports['rsg-core']:createPrompt('stdenis-guarma', vector3(2663.5056, -1543.155, 45.969764), RSGCore.Shared.Keybinds['J'], Lang:t('label2'), { -- [J]
         type = 'client',
         event = 'rsg-travel:client:guarma_boat',
         args = {},
@@ -21,12 +21,12 @@ end)
 
 -- from guarma to stdenis
 Citizen.CreateThread(function()
-    exports['rsg-core']:createPrompt('guarma-buy-ticket', vector3(1268.6583, -6851.772, 43.318504), RSGCore.Shared.Keybinds['ENTER'], 'Buy a Ticket', {
+    exports['rsg-core']:createPrompt('guarma-buy-ticket', vector3(1268.6583, -6851.772, 43.318504), RSGCore.Shared.Keybinds['ENTER'], Lang:t('label1'), {
         type = 'client',
         event = 'rsg-travel:client:buyticket',
         args = {},
     })
-    exports['rsg-core']:createPrompt('guarma-stdenis', vector3(1268.6583, -6851.772, 43.318504), RSGCore.Shared.Keybinds['J'], 'Travel to St Denis', {
+    exports['rsg-core']:createPrompt('guarma-stdenis', vector3(1268.6583, -6851.772, 43.318504), RSGCore.Shared.Keybinds['J'], Lang:t('label3'), {
         type = 'client',
         event = 'rsg-travel:client:stdenis_boat',
         args = {},
@@ -42,8 +42,8 @@ end)
 RegisterNetEvent('rsg-travel:client:buyticket', function(money)
     local input = lib.inputDialog('Purchase Tickets', {
         { 
-            label = 'How Many',
-            description = '$'..Config.TicketCost..' per ticket',
+            label = Lang:t('label5'),
+            description = '$'..Config.TicketCost..Lang:t('label4'),
             type = 'input',
             min = 1,
             max = 10,
@@ -69,7 +69,7 @@ AddEventHandler("rsg-travel:client:guarma_boat", function()
         DoScreenFadeIn(1800)
         SetCinematicModeActive(true)
         Wait(10000)
-        Citizen.InvokeNative(0x1E5B70E53DB661E5, 0, 0, 0, 'Heading to Guarma Port', 'Your boat is sailing', 'Have a great trip ...')
+        Citizen.InvokeNative(0x1E5B70E53DB661E5, 0, 0, 0, Lang:t('label6'), Lang:t('label7'), Lang:t('label8'))
         Wait(20000)
         -- tp guarma
         Citizen.InvokeNative(0x74E2261D2A66849A, 1)
@@ -80,7 +80,7 @@ AddEventHandler("rsg-travel:client:guarma_boat", function()
         SetCinematicModeActive(false)
         ShutdownLoadingScreen()
     else
-        RSGCore.Functions.Notify('you do not have a ticket!', 'error')
+        RSGCore.Functions.Notify(Lang:t('label9'), 'error')
     end
 end)
 
@@ -93,7 +93,7 @@ AddEventHandler("rsg-travel:client:stdenis_boat", function()
         DoScreenFadeOut(500)
         Wait(1000)
         -- tp bateau
-        Citizen.InvokeNative(0x1E5B70E53DB661E5, 0, 0, 0, 'Heading to Saint Denis Port', 'Your boat is sailing', 'Have a great trip ...')
+        Citizen.InvokeNative(0x1E5B70E53DB661E5, 0, 0, 0, Lang:t('label10'), Lang:t('label7'), Lang:t('label8'))
         Wait(30000)
         -- tp guarma
         Citizen.InvokeNative(0x74E2261D2A66849A, 0)
@@ -106,7 +106,7 @@ AddEventHandler("rsg-travel:client:stdenis_boat", function()
         Wait(1000)
         SetCinematicModeActive(false)
     else
-        RSGCore.Functions.Notify('you do not have a ticket!', 'error')
+        RSGCore.Functions.Notify(Lang:t('label9'), 'error')
     end
 end)
 

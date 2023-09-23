@@ -11,9 +11,9 @@ AddEventHandler('rsg-travel:server:buyticket', function(amount)
         Player.Functions.RemoveMoney("cash", totalcost, "purchase-ticket")
         Player.Functions.AddItem('boatticket', amount)
         TriggerClientEvent("inventory:client:ItemBox", src, RSGCore.Shared.Items['boatticket'], "add")
-        RSGCore.Functions.Notify(src, 'boat ticket bought for $'..totalcost, 'success')
+        RSGCore.Functions.Notify(src, Lang:t('label11')..totalcost, 'success')
     else 
-        RSGCore.Functions.Notify(src, 'you don\'t have enough cash to do that!', 'error')
+        RSGCore.Functions.Notify(src, Lang:t('label12'), 'error')
     end
 end)
 
