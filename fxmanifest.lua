@@ -5,9 +5,15 @@ game 'rdr3'
 author 'RexShack#3041'
 description 'rsg-travel'
 
+shared_scripts {
+    '@ox_lib/init.lua',
+    '@rsg-core/shared/locale.lua',
+    'locales/en.lua', -- Change this to your preferred language
+    'config.lua',
+}
+
 client_scripts {
     'client/client.lua',
-	'config.lua',
 }
 
 server_scripts {
