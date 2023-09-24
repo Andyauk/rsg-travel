@@ -8,7 +8,8 @@ description 'rsg-travel'
 shared_scripts {
     '@ox_lib/init.lua',
     '@rsg-core/shared/locale.lua',
-    'locales/en.lua', -- Change this to your preferred language
+    'locales/en.lua', 
+    'locales/*.lua', 
     'config.lua',
 }
 
