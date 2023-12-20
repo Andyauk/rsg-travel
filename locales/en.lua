@@ -9,7 +9,7 @@ local Translations = {
     label8 = 'Have a great trip ...',
     label9 = 'You do not have a ticket!',
     label10 = 'Heading to Saint Denis Port',
-    label11 = 'You bought a boat ticket bought for $',
+    label11 = 'You bought a boat ticket for $',
     label12 = 'You don\'t have enough cash to do that!',
 }
 
