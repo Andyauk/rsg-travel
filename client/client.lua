@@ -83,7 +83,6 @@ AddEventHandler("rsg-travel:client:guarma_boat", function()
         SetCinematicModeActive(false)
         ShutdownLoadingScreen()
     else
-        --RSGCore.Functions.Notify(Lang:t('label9'), 'error')
         lib.notify({ title = Lang:t('label9'), duration = 5000, type = 'error' })
     end
 end)
@@ -111,7 +110,6 @@ AddEventHandler("rsg-travel:client:stdenis_boat", function()
         Wait(1000)
         SetCinematicModeActive(false)
     else
-        --RSGCore.Functions.Notify(Lang:t('label9'), 'error')
         lib.notify({ title = Lang:t('label9'), duration = 5000, type = 'error' })
     end
 end)
