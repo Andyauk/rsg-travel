@@ -1,6 +1,8 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
 
--- travel from stdenis to guarma
+-----------------------------------------------------------------------
+--From St.Denis to Guarma
+-----------------------------------------------------------------------
 Citizen.CreateThread(function()
     -- buy ticket
     exports['rsg-core']:createPrompt('stdenis-buy-ticket', vector3(2663.5056, -1543.155, 45.969764), RSGCore.Shared.Keybinds['ENTER'], Lang:t('label1'), {
@@ -18,8 +20,9 @@ Citizen.CreateThread(function()
     SetBlipSprite(PortBlip, 2033397166, 1)
     SetBlipScale(PortBlip, 0.2)   
 end)
-
--- from guarma to stdenis
+-----------------------------------------------------------------------
+--From Guarma to St.Denis
+-----------------------------------------------------------------------
 Citizen.CreateThread(function()
     exports['rsg-core']:createPrompt('guarma-buy-ticket', vector3(1268.6583, -6851.772, 43.318504), RSGCore.Shared.Keybinds['ENTER'], Lang:t('label1'), {
         type = 'client',
@@ -35,7 +38,6 @@ Citizen.CreateThread(function()
     SetBlipSprite(PortBlip, 2033397166, 1)
     SetBlipScale(PortBlip, 0.2)
 end)
-
 -------------------------------------------------------------------------------------------
 -- buy tickets
 -------------------------------------------------------------------------------------------
@@ -54,8 +56,9 @@ RegisterNetEvent('rsg-travel:client:buyticket', function(money)
     if not input then return end
     TriggerServerEvent("rsg-travel:server:buyticket", tonumber(input[1]))
 end)
-
--- boat travel to guarma
+-----------------------------------------------------------------------
+--Boat travel to Guarma
+-----------------------------------------------------------------------
 RegisterNetEvent("rsg-travel:client:guarma_boat")
 AddEventHandler("rsg-travel:client:guarma_boat", function()
     local hasItem = RSGCore.Functions.HasItem('boatticket', 1)
@@ -80,11 +83,13 @@ AddEventHandler("rsg-travel:client:guarma_boat", function()
         SetCinematicModeActive(false)
         ShutdownLoadingScreen()
     else
-        RSGCore.Functions.Notify(Lang:t('label9'), 'error')
+        --RSGCore.Functions.Notify(Lang:t('label9'), 'error')
+        lib.notify({ title = Lang:t('label9'), duration = 5000, type = 'error' })
     end
 end)
-
--- boat travel to stdenis
+-----------------------------------------------------------------------
+--Boat travel to St Denis
+-----------------------------------------------------------------------
 RegisterNetEvent("rsg-travel:client:stdenis_boat")
 AddEventHandler("rsg-travel:client:stdenis_boat", function()
     local hasItem = RSGCore.Functions.HasItem('boatticket', 1)
@@ -106,11 +111,13 @@ AddEventHandler("rsg-travel:client:stdenis_boat", function()
         Wait(1000)
         SetCinematicModeActive(false)
     else
-        RSGCore.Functions.Notify(Lang:t('label9'), 'error')
+        --RSGCore.Functions.Notify(Lang:t('label9'), 'error')
+        lib.notify({ title = Lang:t('label9'), duration = 5000, type = 'error' })
     end
 end)
-
------ toggle guarma world stuff -----
+-----------------------------------------------------------------------
+--Toggle guarma world stuff
+-----------------------------------------------------------------------
 function SetGuarmaWorldhorizonActive(toggle)
     Citizen.InvokeNative(0x74E2261D2A66849A , toggle)
 end
@@ -151,4 +158,14 @@ CreateThread(function()
         end
     end
 end)
------ end guarma world stuff -----
+-----------------------------------------------------------------------
+--Ox notify calls from server
+-----------------------------------------------------------------------
+RegisterNetEvent('rsg-travel:client:showNotification')
+AddEventHandler('rsg-travel:client:showNotification', function(success, message, type)
+    if success then
+        lib.notify({ title = message, duration = 5000, type = type })
+    else
+        lib.notify({ title = message, duration = 5000, type = type })
+    end
+end)

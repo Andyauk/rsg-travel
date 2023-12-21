@@ -30,25 +30,29 @@ local function CheckVersion()
 end
 
 -----------------------------------------------------------------------
-
--- buy ticket
+--Buy Ticket
+-----------------------------------------------------------------------
 RegisterServerEvent('rsg-travel:server:buyticket')
 AddEventHandler('rsg-travel:server:buyticket', function(amount)
     local src = source
     local Player = RSGCore.Functions.GetPlayer(src)
-	local totalcost = amount * Config.TicketCost
+    local totalcost = amount * Config.TicketCost
     local cashBalance = Player.PlayerData.money["cash"]
+
     if cashBalance >= totalcost then
         Player.Functions.RemoveMoney("cash", totalcost, "purchase-ticket")
         Player.Functions.AddItem('boatticket', amount)
         TriggerClientEvent("inventory:client:ItemBox", src, RSGCore.Shared.Items['boatticket'], "add")
-        RSGCore.Functions.Notify(src, Lang:t('label11')..totalcost, 'success')
+
+        TriggerClientEvent("rsg-travel:client:showNotification", src, true, Lang:t('label11')..totalcost, 'success') -- Signal client to show success notification
     else 
-        RSGCore.Functions.Notify(src, Lang:t('label12'), 'error')
+        TriggerClientEvent("rsg-travel:client:showNotification", src, false, Lang:t('label12'), 'error') -- Signal client to show error notification
     end
 end)
 
--- remove ticket
+-----------------------------------------------------------------------
+--Remove Ticket
+-----------------------------------------------------------------------
 RegisterNetEvent('rsg-travel:server:removeItem', function(item, amount)
     local src = source
     local Player = RSGCore.Functions.GetPlayer(src)

@@ -7,10 +7,10 @@ local Translations = {
     label6 = 'Heading to Guarma Port',
     label7 = 'Your boat is sailing',
     label8 = 'Have a great trip ...',
-    label9 = 'you do not have a ticket!',
+    label9 = 'You do not have a ticket!',
     label10 = 'Heading to Saint Denis Port',
-    label11 = 'boat ticket bought for $',
-    label12 = 'you don\'t have enough cash to do that!',
+    label11 = 'You bought a boat ticket for $',
+    label12 = 'You don\'t have enough cash to do that!',
 }
 
 Lang = Locale:new({
